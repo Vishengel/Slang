@@ -23,7 +23,7 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 		
 		drawGrid(g);
-		drawSnake(g);
+		drawObjects(g);
 	}
 	
 	public void drawGrid(Graphics g) {
@@ -37,7 +37,7 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
-	public void drawSnake(Graphics g) {
+	public void drawObjects(Graphics g) {
 		int gridSize = model.getGameGrid().getGridSize();
 		int cellSize = getSize().width / gridSize;
 		
@@ -47,6 +47,9 @@ public class GamePanel extends JPanel {
 			for (int j=0; j<gridSize; j++) {
 				if (grid.getCellArray()[i][j].getHasSnake()) {
 					g.setColor(Color.GREEN);
+					g.fillRect(i*cellSize+1, j*cellSize+1, cellSize-1, cellSize-1);
+				} else if (grid.getCellArray()[i][j].getHasFood()) {
+					g.setColor(Color.RED);
 					g.fillRect(i*cellSize+1, j*cellSize+1, cellSize-1, cellSize-1);
 				}
 			}

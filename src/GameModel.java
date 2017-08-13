@@ -1,26 +1,53 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public class GameModel {
 	private GameGrid grid;
 	private boolean[] keysDown;
 	private Snake snake;
-	private boolean snakeDied = false;
-	private boolean foodEaten = false;
+	private boolean wallCollision = false, selfCollision = false, snakeDied = false;
+	//Keep track of the food's coordinates
+	private int foodX;
+	private int foodY;
 	
 	public GameModel() {
 		grid = new GameGrid();
 		snake = new Snake(grid.getGridSize());
+		spawnFood();
 	}
 	
 	public void updateModel(int keyPressed) {
 		clearGrid();
+		snake.setDirections();
 		moveSnake(keyPressed);
 		
-		checkWallCollission();
+		checkWallCollision();
+		
+		if (!wallCollision) {
+			//checkSelfCollision();
+		}
+		
+		if (wallCollision || selfCollision) {
+			snakeDied = true;
+		}
 		
 		if (!snakeDied) {
+			
 			for(SnakeBlock sb : snake.getSnakeList()) {
-				grid.getCellArray()[sb.getXPos()][sb.getYPos()].setHasSnake(true);
+				if (grid.getCellArray()[sb.getXPos()][sb.getYPos()].getHasSnake()) {
+					snakeDied = true;
+					break;
+				} else {
+					grid.getCellArray()[sb.getXPos()][sb.getYPos()].setHasSnake(true);
+				}
 			}
 		}
+		
+		if (snake.getHead().getXPos() == foodX && snake.getHead().getYPos() == foodY) {
+			grid.getCellArray()[foodX][foodY].setHasFood(false);
+			snake.addSnakeBlock();
+			spawnFood();
+		}
+		
 	}
 	
 	public void clearGrid() {
@@ -47,14 +74,29 @@ public class GameModel {
 				break;
 		}
 		
-		snake.getHead().move();
+		for (SnakeBlock sb : snake.getSnakeList()) {
+			sb.move();
+		}
 	}
 	
-	public void checkWallCollission() {
+	public void checkSelfCollision() {
+		if (grid.getCellArray()[snake.getHead().getXPos()][snake.getHead().getYPos()].getHasSnake()) {
+			selfCollision = true;
+		}
+	}
+	
+	public void checkWallCollision() {
 		if (snake.getHead().getXPos() < 0 || snake.getHead().getXPos() >= grid.gridSize || 
 			snake.getHead().getYPos() < 0 || snake.getHead().getYPos() >= grid.gridSize ) {
-			snakeDied = true;
+			wallCollision = true;
 		}
+	}
+	
+	public void spawnFood() {
+		foodX = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
+		foodY = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
+		
+		grid.getCellArray()[foodX][foodY].setHasFood(true);
 	}
 	
 	public void setKeysDown(boolean[] keysDown) {

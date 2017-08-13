@@ -38,6 +38,10 @@ public class SnakeBlock {
 		this.yPos = newYPos;
 	}
 	
+	public String getDirection() {
+		return this.direction;
+	}
+	
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
