@@ -13,7 +13,7 @@ public class GameController {
 
 
 	public GameController() {
-		this.strategy = Strategy.MANUAL;
+		this.strategy = Strategy.RANDOM;
 		initGame();
 	}
 	
@@ -74,6 +74,8 @@ public class GameController {
 		if (this.strategy.equals(Strategy.MANUAL)) {
 			return this.keyPressed;
 		} else {
+			// int a = this.ai.getKeyInput(model);
+			// System.out.println(a);
 			return this.ai.getKeyInput(model);
 		}
 	}
