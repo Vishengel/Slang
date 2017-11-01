@@ -6,17 +6,11 @@ public class GameController {
 	private GameView view;
 	private boolean isRunning = false;
 	private enableViewer = false;
-		private final int gameSpeed = 40;
+	private final int gameSpeed = 40;
 	int keyPressed;
-<<<<<<< HEAD
-
-	InputGenerator randomInput;
-=======
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
->>>>>>> 011690a2dfdbd502c7ea884d193a566a39eae4dc
-
 
 	public GameController() {
 		this.strategy = Strategy.MANUAL;
