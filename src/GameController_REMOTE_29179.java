@@ -5,18 +5,10 @@ public class GameController {
 	private GameModel model;
 	private GameView view;
 	private boolean isRunning = false;
-	private enableViewer = false;
-		private final int gameSpeed = 40;
 	int keyPressed;
-<<<<<<< HEAD
-
-	InputGenerator randomInput;
-=======
 	private final int gameSpeed = 140;
-	private AI ai;
+	AI ai;
 	private Strategy strategy;
->>>>>>> 011690a2dfdbd502c7ea884d193a566a39eae4dc
-
 
 	public GameController() {
 		this.strategy = Strategy.MANUAL;
@@ -29,17 +21,13 @@ public class GameController {
 	}
 	
 	public void initGame() {
-		if (!strategy.equals(Strategy.MANUAL)) {
-			setAI();
-			System.out.println("AI set");
-		}
-	
+		ai = new InputGenerator();
 		model = new GameModel();
-		// view = new GameView();
+		view = new GameView();
 
-		// view.getGamePanel().addKeyListener(new InputController());
-		// view.getGamePanel().requestFocusInWindow();
-		// this.view.getGamePanel().setGameModel(model);	
+		view.getGamePanel().addKeyListener(new InputController());
+		view.getGamePanel().requestFocusInWindow();
+		this.view.getGamePanel().setGameModel(model);	
 		
 		isRunning = true;
 		keyPressed = 0;
@@ -57,13 +45,11 @@ public class GameController {
 			this.model.updateModel(getKeyInput());
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
-				//System.out.println("SLAAANG?");
-				System.out.print("Score: ");
-				System.out.println(model.getScore());
+				System.out.println("SLAAANG?");
 				model = new GameModel();
 			} else {			
-				// this.view.getGamePanel().setGameModel(model);
-				// this.view.getGamePanel().repaint();
+				this.view.getGamePanel().setGameModel(model);
+				this.view.getGamePanel().repaint();
 			}
 
 			try{
@@ -79,15 +65,10 @@ public class GameController {
 		if (this.strategy.equals(Strategy.MANUAL)) {
 			return this.keyPressed;
 		} else {
-			return this.ai.getKeyInput();
+			return ai.getKeyInput();
 		}
 	}
 
-	public void setAI() {
-		if (this.strategy.equals(Strategy.RANDOM)) {
-			this.ai = new AIRandom();
-		}
-	}
 	
 	class InputController implements KeyListener {
 		

@@ -13,7 +13,7 @@ public class GameController {
 	InputGenerator randomInput;
 =======
 	private final int gameSpeed = 140;
-	private AI ai;
+	AI ai;
 	private Strategy strategy;
 >>>>>>> 011690a2dfdbd502c7ea884d193a566a39eae4dc
 
@@ -29,11 +29,7 @@ public class GameController {
 	}
 	
 	public void initGame() {
-		if (!strategy.equals(Strategy.MANUAL)) {
-			setAI();
-			System.out.println("AI set");
-		}
-	
+		ai = new InputGenerator();
 		model = new GameModel();
 		// view = new GameView();
 
@@ -79,15 +75,10 @@ public class GameController {
 		if (this.strategy.equals(Strategy.MANUAL)) {
 			return this.keyPressed;
 		} else {
-			return this.ai.getKeyInput();
+			return ai.getKeyInput();
 		}
 	}
 
-	public void setAI() {
-		if (this.strategy.equals(Strategy.RANDOM)) {
-			this.ai = new AIRandom();
-		}
-	}
 	
 	class InputController implements KeyListener {
 		

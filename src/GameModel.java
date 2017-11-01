@@ -94,7 +94,11 @@ public class GameModel {
 		System.out.println("No food collision");
 		return false;
 	}
-	
+
+	public int getScore() {
+		return this.score;
+	}
+
 	public void spawnFood() {
 		do {
 			foodX = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
