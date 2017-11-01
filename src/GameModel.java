@@ -6,7 +6,7 @@ public class GameModel {
 	private Snake snake;
 	private boolean wallCollision = false, selfCollision = false, snakeDied = false;
 	//Keep track of the food's coordinates
-	private int foodX, foodY;
+	private int foodX, foodY, score;
 	
 	public GameModel() {
 		grid = new GameGrid();
@@ -33,6 +33,7 @@ public class GameModel {
 		}
 		
 		if (snake.getHead().getXPos() == foodX && snake.getHead().getYPos() == foodY) {
+			this.score++;
 			grid.getCellArray()[foodX][foodY].setHasFood(false);
 			snake.addSnakeBlock();
 			spawnFood();
