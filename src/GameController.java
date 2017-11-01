@@ -1,4 +1,4 @@
-import java.awt.event.KeyEvent;
+simport java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameController {
@@ -10,6 +10,8 @@ public class GameController {
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
+
+
 
 
 	public GameController() {
