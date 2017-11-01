@@ -1,14 +1,15 @@
 
 public class AISimple extends AI {
-	
-	private int keyInput;
+	GameModel model;
 
-	public AISimple() {
-		
+	public AISimple(GameModel model) {
+		this.model = model;
 	}
 	
-	public int getKeyInput() {
-		return keyInput;
+	public int getKeyInput(GameModel model) {
+		this.model = model;
+		
+		return 87;
 	}
 	
 }
