@@ -5,17 +5,11 @@ public class GameController {
 	private GameModel model;
 	private GameView view;
 	private boolean isRunning = false;
-	private enableViewer = false;
-		private final int gameSpeed = 40;
+	private boolean enableViewer = false;
+	private final int gameSpeed = 40;
 	int keyPressed;
-<<<<<<< HEAD
-
-	InputGenerator randomInput;
-=======
-	private final int gameSpeed = 140;
 	AI ai;
 	private Strategy strategy;
->>>>>>> 011690a2dfdbd502c7ea884d193a566a39eae4dc
 
 
 	public GameController() {
@@ -23,19 +17,17 @@ public class GameController {
 		initGame();
 	}
 	
-	public GameController(Strategy strategy) {
-		this.strategy = strategy;
-		initGame();
-	}
-	
 	public void initGame() {
-		ai = new InputGenerator();
+		randomInput = new InputGenerator();
 		model = new GameModel();
-		// view = new GameView();
 
-		// view.getGamePanel().addKeyListener(new InputController());
-		// view.getGamePanel().requestFocusInWindow();
-		// this.view.getGamePanel().setGameModel(model);	
+		if(enableViewer) {
+			view = new GameView();
+			view.getGamePanel().addKeyListener(new InputController());
+			view.getGamePanel().requestFocusInWindow();
+			this.view.getGamePanel().setGameModel(model);
+		}
+	
 		
 		isRunning = true;
 		keyPressed = 0;
@@ -50,16 +42,16 @@ public class GameController {
 			now = System.nanoTime();
 			lastLoopTime = now;
 
-			this.model.updateModel(getKeyInput());
+			this.model.updateModel(randomInput.generateInput());
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
 				//System.out.println("SLAAANG?");
 				System.out.print("Score: ");
 				System.out.println(model.getScore());
 				model = new GameModel();
-			} else {			
-				// this.view.getGamePanel().setGameModel(model);
-				// this.view.getGamePanel().repaint();
+			} else if(enableViewer) {			
+				this.view.getGamePanel().setGameModel(model);
+				this.view.getGamePanel().repaint();
 			}
 
 			try{
@@ -70,15 +62,6 @@ public class GameController {
 			}
 		}	
 	}
-	
-	public int getKeyInput() {
-		if (this.strategy.equals(Strategy.MANUAL)) {
-			return this.keyPressed;
-		} else {
-			return ai.getKeyInput();
-		}
-	}
-
 	
 	class InputController implements KeyListener {
 		
