@@ -7,7 +7,7 @@ public class AISimple extends AI {
 		
 	}
 	
-	public int getKeyInput(GameModel model) {
+	public int getKeyInput(GameModel model, boolean logSteps) {
 		this.model = model;
 		
 		return 87;

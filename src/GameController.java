@@ -6,6 +6,7 @@ public class GameController {
 	private GameView view;
 	private boolean isRunning = false;
 	private boolean enableViewer = true;
+	private boolean logSteps = true;
 	int keyPressed;
 	private final int gameSpeed = 140;
 	private AI ai;
@@ -72,11 +73,16 @@ public class GameController {
 	
 	public int getKeyInput() {
 		if (this.strategy.equals(Strategy.MANUAL)) {
-			return this.keyPressed;
+			int temp = this.keyPressed;
+
+			if(logSteps) {
+				System.out.println(temp);
+			}
+			return temp;
 		} else {
 			// int a = this.ai.getKeyInput(model);
 			// System.out.println(a);
-			return this.ai.getKeyInput(model);
+			return this.ai.getKeyInput(model, logSteps);
 		}
 	}
 
