@@ -1,4 +1,4 @@
-simport java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameController {
@@ -6,17 +6,17 @@ public class GameController {
 	private GameView view;
 	private boolean isRunning = false;
 	private boolean enableViewer = true;
-	private boolean logSteps = true;
 	int keyPressed;
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
+	private boolean logSteps = true;
 
 
 
 
 	public GameController() {
-		this.strategy = Strategy.RANDOM;
+		this.strategy = Strategy.MANUAL;
 		initGame();
 	}
 	
@@ -28,7 +28,7 @@ public class GameController {
 	public void initGame() {
 		if (!strategy.equals(Strategy.MANUAL)) {
 			setAI();
-			System.out.println("AI set");
+			//System.out.println("AI set");
 		}
 	
 		model = new GameModel();
@@ -56,8 +56,8 @@ public class GameController {
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
 				//System.out.println("SLAAANG?");
-				System.out.print("Score: ");
-				System.out.println(model.getScore());
+				//System.out.print("Score: ");
+				//System.out.println(model.getScore());
 				model = new GameModel();
 			} else if (enableViewer) {			
 				this.view.getGamePanel().setGameModel(model);
@@ -75,15 +75,8 @@ public class GameController {
 	
 	public int getKeyInput() {
 		if (this.strategy.equals(Strategy.MANUAL)) {
-			int temp = this.keyPressed;
-
-			if(logSteps) {
-				System.out.println(temp);
-			}
-			return temp;
+			return this.keyPressed;
 		} else {
-			// int a = this.ai.getKeyInput(model);
-			// System.out.println(a);
 			return this.ai.getKeyInput(model, logSteps);
 		}
 	}
