@@ -1,16 +1,18 @@
-import java.awt.event.KeyEvent;
+simport java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameController {
 	private GameModel model;
 	private GameView view;
 	private boolean isRunning = false;
-	private enableViewer = false;
-	private final int gameSpeed = 40;
+	private boolean enableViewer = true;
 	int keyPressed;
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
+
+
+
 
 	public GameController() {
 		this.strategy = Strategy.MANUAL;
@@ -29,11 +31,12 @@ public class GameController {
 		}
 	
 		model = new GameModel();
-		// view = new GameView();
-
-		// view.getGamePanel().addKeyListener(new InputController());
-		// view.getGamePanel().requestFocusInWindow();
-		// this.view.getGamePanel().setGameModel(model);	
+		if (enableViewer) {
+			view = new GameView();
+			view.getGamePanel().addKeyListener(new InputController());
+			view.getGamePanel().requestFocusInWindow();
+			view.getGamePanel().setGameModel(model);	
+		}
 		
 		isRunning = true;
 		keyPressed = 0;
@@ -55,9 +58,9 @@ public class GameController {
 				System.out.print("Score: ");
 				System.out.println(model.getScore());
 				model = new GameModel();
-			} else {			
-				// this.view.getGamePanel().setGameModel(model);
-				// this.view.getGamePanel().repaint();
+			} else if (enableViewer) {			
+				this.view.getGamePanel().setGameModel(model);
+				this.view.getGamePanel().repaint();
 			}
 
 			try{
