@@ -5,9 +5,12 @@ public class GameController {
 	private GameModel model;
 	private GameView view;
 	private boolean isRunning = false;
+	private enableViewer = false;
+		private final int gameSpeed = 40;
 	int keyPressed;
-	private final int gameSpeed = 140;
+
 	InputGenerator randomInput;
+
 
 	public GameController() {
 		initGame();
@@ -16,11 +19,11 @@ public class GameController {
 	public void initGame() {
 		randomInput = new InputGenerator();
 		model = new GameModel();
-		view = new GameView();
+		// view = new GameView();
 
-		view.getGamePanel().addKeyListener(new InputController());
-		view.getGamePanel().requestFocusInWindow();
-		this.view.getGamePanel().setGameModel(model);	
+		// view.getGamePanel().addKeyListener(new InputController());
+		// view.getGamePanel().requestFocusInWindow();
+		// this.view.getGamePanel().setGameModel(model);	
 		
 		isRunning = true;
 		keyPressed = 0;
@@ -38,11 +41,13 @@ public class GameController {
 			this.model.updateModel(randomInput.generateInput());
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
-				System.out.println("SLAAANG?");
+				//System.out.println("SLAAANG?");
+				System.out.print("Score: ");
+				System.out.println(model.getScore());
 				model = new GameModel();
 			} else {			
-				this.view.getGamePanel().setGameModel(model);
-				this.view.getGamePanel().repaint();
+				// this.view.getGamePanel().setGameModel(model);
+				// this.view.getGamePanel().repaint();
 			}
 
 			try{
