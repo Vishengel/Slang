@@ -6,8 +6,7 @@ public class GameModel {
 	private Snake snake;
 	private boolean wallCollision = false, selfCollision = false, snakeDied = false;
 	//Keep track of the food's coordinates
-	private int foodX;
-	private int foodY;
+	private int foodX, foodY;
 	
 	public GameModel() {
 		grid = new GameGrid();
@@ -22,16 +21,7 @@ public class GameModel {
 		
 		checkWallCollision();
 		
-		if (!wallCollision) {
-			//checkSelfCollision();
-		}
-		
-		if (wallCollision || selfCollision) {
-			snakeDied = true;
-		}
-		
 		if (!snakeDied) {
-			
 			for(SnakeBlock sb : snake.getSnakeList()) {
 				if (grid.getCellArray()[sb.getXPos()][sb.getYPos()].getHasSnake()) {
 					snakeDied = true;
@@ -61,16 +51,24 @@ public class GameModel {
 	public void moveSnake(int keyPressed) {
 		switch(keyPressed) {
 			case 87: 
-				snake.getHead().setDirection("up");
+				if (!snake.getHead().getDirection().equals("down")) {
+					snake.getHead().setDirection("up");
+				}
 				break;
 			case 83:
-				snake.getHead().setDirection("down");
+				if (!snake.getHead().getDirection().equals("up")) {
+					snake.getHead().setDirection("down");
+				}
 				break;
 			case 65:
-				snake.getHead().setDirection("left");
+				if (!snake.getHead().getDirection().equals("right")) {
+					snake.getHead().setDirection("left");
+				}
 				break;
 			case 68:
-				snake.getHead().setDirection("right");
+				if (!snake.getHead().getDirection().equals("left")) {
+					snake.getHead().setDirection("right");
+				}
 				break;
 		}
 		
@@ -79,22 +77,28 @@ public class GameModel {
 		}
 	}
 	
-	public void checkSelfCollision() {
-		if (grid.getCellArray()[snake.getHead().getXPos()][snake.getHead().getYPos()].getHasSnake()) {
-			selfCollision = true;
-		}
-	}
-	
 	public void checkWallCollision() {
 		if (snake.getHead().getXPos() < 0 || snake.getHead().getXPos() >= grid.gridSize || 
 			snake.getHead().getYPos() < 0 || snake.getHead().getYPos() >= grid.gridSize ) {
-			wallCollision = true;
+			snakeDied = true;
 		}
 	}
 	
+	public boolean checkFoodCollision(int foodX, int foodY) {
+		for (SnakeBlock block : this.snake.getSnakeList()) {
+			if (block.getXPos() == foodX && block.getYPos() == foodY) {
+				return true;
+			}
+		}
+		System.out.println("No food collision");
+		return false;
+	}
+	
 	public void spawnFood() {
-		foodX = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
-		foodY = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
+		do {
+			foodX = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
+			foodY = ThreadLocalRandom.current().nextInt(0, grid.getGridSize());
+		} while (checkFoodCollision(foodX, foodY));
 		
 		grid.getCellArray()[foodX][foodY].setHasFood(true);
 	}

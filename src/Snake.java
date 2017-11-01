@@ -42,8 +42,14 @@ public class Snake {
 	}
 	
 	public void setDirections() {
+		
 		for (int i=snakeList.size()-1; i>0; i--) {
 			snakeList.get(i).setDirection(snakeList.get(i-1).getDirection());
 		}
+		/*
+		for (int i=1; i<snakeList.size()-1; i++) {
+			snakeList.get(i).setDirection(snakeList.get(i-1).getDirection());
+		}
+		*/
 	}
 }

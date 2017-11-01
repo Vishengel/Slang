@@ -6,7 +6,6 @@ public class GameController {
 	private GameView view;
 	private boolean isRunning = false;
 	int keyPressed;
-	private final int fps = 60;
 	private final int gameSpeed = 140;
 	
 	public GameController() {
@@ -28,16 +27,17 @@ public class GameController {
 	}
 	
 	public void gameLoop() {
-		long lastLoopTime = System.nanoTime(), optimalTime = 1000000000 / fps, now, updateLength;
+		long lastLoopTime = System.nanoTime(), now;
 		
 		while(isRunning) {
 			now = System.nanoTime();
-			updateLength = now - lastLoopTime;
 			lastLoopTime = now;
 
 			this.model.updateModel(keyPressed);
 			if (this.model.getSnakeDied()) {
-				isRunning = false;
+				//isRunning = false;
+				System.out.println("SLAAANG?");
+				model = new GameModel();
 			} else {			
 				this.view.getGamePanel().setGameModel(model);
 				this.view.getGamePanel().repaint();
@@ -49,10 +49,7 @@ public class GameController {
 				Thread.currentThread().interrupt();
 				return;
 			}
-		}
-		
-		System.out.println("SLAAANG?");
-		initGame();
+		}	
 	}
 	
 	class InputController implements KeyListener {

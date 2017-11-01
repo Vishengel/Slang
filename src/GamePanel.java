@@ -32,6 +32,7 @@ public class GamePanel extends JPanel {
 		
 		for (int i=0; i<gridSize; i++) {
 			for (int j=0; j<gridSize; j++) {
+				g.setColor(Color.WHITE);
 				g.drawRect(i*cellSize, j*cellSize, cellSize, cellSize);
 			}
 		}
