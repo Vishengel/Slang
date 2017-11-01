@@ -5,17 +5,11 @@ public class GameController {
 	private GameModel model;
 	private GameView view;
 	private boolean isRunning = false;
-	private enableViewer = false;
-		private final int gameSpeed = 40;
+	private boolean enableViewer = true;
 	int keyPressed;
-<<<<<<< HEAD
-
-	InputGenerator randomInput;
-=======
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
->>>>>>> 011690a2dfdbd502c7ea884d193a566a39eae4dc
 
 
 	public GameController() {
@@ -35,11 +29,12 @@ public class GameController {
 		}
 	
 		model = new GameModel();
-		// view = new GameView();
-
-		// view.getGamePanel().addKeyListener(new InputController());
-		// view.getGamePanel().requestFocusInWindow();
-		// this.view.getGamePanel().setGameModel(model);	
+		if (enableViewer) {
+			view = new GameView();
+			view.getGamePanel().addKeyListener(new InputController());
+			view.getGamePanel().requestFocusInWindow();
+			view.getGamePanel().setGameModel(model);	
+		}
 		
 		isRunning = true;
 		keyPressed = 0;
@@ -61,9 +56,9 @@ public class GameController {
 				System.out.print("Score: ");
 				System.out.println(model.getScore());
 				model = new GameModel();
-			} else {			
-				// this.view.getGamePanel().setGameModel(model);
-				// this.view.getGamePanel().repaint();
+			} else if (enableViewer) {			
+				this.view.getGamePanel().setGameModel(model);
+				this.view.getGamePanel().repaint();
 			}
 
 			try{
