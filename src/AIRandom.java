@@ -6,7 +6,7 @@ public class AIRandom extends AI {
 
 	private int[] inputs = new int[] {87, 65, 83, 68};// [W, A, S, D]
 
-	public int generateInput () {
+	public int getKeyInput () {
 		int randomInput = randomGenerator.nextInt(inputs.length);
 		return inputs[randomInput];
 	}
