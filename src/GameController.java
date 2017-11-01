@@ -7,14 +7,21 @@ public class GameController {
 	private boolean isRunning = false;
 	int keyPressed;
 	private final int gameSpeed = 140;
-	InputGenerator randomInput;
+	AI ai;
+	private Strategy strategy;
 
 	public GameController() {
+		this.strategy = Strategy.MANUAL;
+		initGame();
+	}
+	
+	public GameController(Strategy strategy) {
+		this.strategy = strategy;
 		initGame();
 	}
 	
 	public void initGame() {
-		randomInput = new InputGenerator();
+		ai = new InputGenerator();
 		model = new GameModel();
 		view = new GameView();
 
@@ -35,7 +42,7 @@ public class GameController {
 			now = System.nanoTime();
 			lastLoopTime = now;
 
-			this.model.updateModel(randomInput.generateInput());
+			this.model.updateModel(getKeyInput());
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
 				System.out.println("SLAAANG?");
@@ -53,6 +60,15 @@ public class GameController {
 			}
 		}	
 	}
+	
+	public int getKeyInput() {
+		if (this.strategy.equals(Strategy.MANUAL)) {
+			return this.keyPressed;
+		} else {
+			return ai.getKeyInput();
+		}
+	}
+
 	
 	class InputController implements KeyListener {
 		
