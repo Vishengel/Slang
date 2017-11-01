@@ -74,13 +74,15 @@ public class GameController {
 		if (this.strategy.equals(Strategy.MANUAL)) {
 			return this.keyPressed;
 		} else {
-			return this.ai.getKeyInput();
+			return this.ai.getKeyInput(model);
 		}
 	}
 
 	public void setAI() {
 		if (this.strategy.equals(Strategy.RANDOM)) {
 			this.ai = new AIRandom();
+		} else if (this.strategy.equals(Strategy.SIMPLE)) {
+			this.ai = new AISimple(model);
 		}
 	}
 	
