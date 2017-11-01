@@ -7,12 +7,14 @@ public class GameController {
 	private boolean isRunning = false;
 	int keyPressed;
 	private final int gameSpeed = 140;
-	
+	InputGenerator randomInput;
+
 	public GameController() {
 		initGame();
 	}
 	
 	public void initGame() {
+		randomInput = new InputGenerator();
 		model = new GameModel();
 		view = new GameView();
 
@@ -33,7 +35,7 @@ public class GameController {
 			now = System.nanoTime();
 			lastLoopTime = now;
 
-			this.model.updateModel(keyPressed);
+			this.model.updateModel(randomInput.generateInput());
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
 				System.out.println("SLAAANG?");
