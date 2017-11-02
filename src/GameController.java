@@ -12,9 +12,6 @@ public class GameController {
 	private Strategy strategy;
 	private boolean logSteps = true;
 
-
-
-
 	public GameController() {
 		this.strategy = Strategy.MANUAL;
 		initGame();
