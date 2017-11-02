@@ -9,8 +9,14 @@ public class AISimple extends AI {
 	
 	public int getKeyInput(GameModel model, boolean logSteps) {
 		this.model = model;
-		
-		return 87;
+
+		int theMove = 87;
+
+		if(logSteps) {
+			System.out.println(theMove);
+		}
+
+		return theMove;
 	}
 	
 }
