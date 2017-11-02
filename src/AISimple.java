@@ -13,7 +13,6 @@ public class AISimple extends AI {
 		int headX = model.getSnake().getHead().getXPos(), headY = model.getSnake().getHead().getYPos();
 		int foodX = model.getFoodX(), foodY = model.getFoodY();
 		String direction = model.getSnake().getHead().getDirection();
-		
 		if (headX > foodX && !(direction.equals("right") || direction.equals("left"))) {
 			keyInput = 65;
 		} else if (headX < foodX && !(direction.equals("right") || direction.equals("left"))) {
@@ -22,6 +21,10 @@ public class AISimple extends AI {
 			keyInput = 87;
 		} else if (headY < foodY && !(direction.equals("up") || direction.equals("down"))) {
 			keyInput = 83;
+		}
+
+		if(logSteps) {
+			System.out.println(keyInput);
 		}
 		
 		return keyInput;

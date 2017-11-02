@@ -13,7 +13,7 @@ public class GameController {
 	private boolean logSteps = true;
 
 	public GameController() {
-		this.strategy = Strategy.MANUAL;
+		this.strategy = Strategy.SIMPLE;
 		initGame();
 	}
 	
