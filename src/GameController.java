@@ -7,11 +7,19 @@ public class GameController {
 	private GameView view;
 	private boolean isRunning = false;
 	private boolean enableViewer = false;
+	private boolean logSteps = false;
 	int keyPressed;
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
-	private boolean logSteps = false;
+
+
+	public void getOptions(SlangOptions slangOptions) {
+		// private final int gameSpeed = 140;
+		// private boolean isRunning = false;
+		// private boolean enableViewer = false;
+		// private boolean logSteps = false;
+	}
 
 	public GameController() {
 		this.strategy = Strategy.SIMPLE;
