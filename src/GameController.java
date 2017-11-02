@@ -14,7 +14,7 @@ public class GameController {
 	private Strategy strategy;
 
 
-	public void getOptions(SlangOptions slangOptions) {
+	public void processOptions(SlangOptions slangOptions) {
 		// private final int gameSpeed = 140;
 		// private boolean isRunning = false;
 		// private boolean enableViewer = false;
