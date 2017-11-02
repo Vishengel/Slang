@@ -112,6 +112,14 @@ public class GameModel {
 		this.keysDown = keysDown;
 	}
 	
+	public int getFoodX() {
+		return foodX;
+	}
+	
+	public int getFoodY() {
+		return foodY;
+	}
+	
 	public GameGrid getGameGrid() {
 		return this.grid;
 	}
