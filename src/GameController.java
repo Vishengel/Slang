@@ -1,16 +1,17 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Properties;
 
 public class GameController {
 	private GameModel model;
 	private GameView view;
 	private boolean isRunning = false;
-	private boolean enableViewer = true;
+	private boolean enableViewer = false;
 	int keyPressed;
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
-	private boolean logSteps = true;
+	private boolean logSteps = false;
 
 	public GameController() {
 		this.strategy = Strategy.SIMPLE;
