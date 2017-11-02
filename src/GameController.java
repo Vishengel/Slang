@@ -54,7 +54,7 @@ public class GameController {
 				//isRunning = false;
 				//System.out.println("SLAAANG?");
 				//System.out.print("Score: ");
-				//System.out.println(model.getScore());
+				System.out.println(model.getScore());
 				model = new GameModel();
 			} else if (enableViewer) {			
 				this.view.getGamePanel().setGameModel(model);
@@ -72,6 +72,8 @@ public class GameController {
 	
 	public int getKeyInput() {
 		if (this.strategy.equals(Strategy.MANUAL)) {
+			int a = this.keyPressed;
+			System.out.println(a);
 			return this.keyPressed;
 		} else {
 			return this.ai.getKeyInput(model, logSteps);
