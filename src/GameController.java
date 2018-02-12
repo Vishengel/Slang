@@ -10,6 +10,7 @@ public class GameController {
 	private final int gameSpeed = 140;
 	private AI ai;
 	private Strategy strategy;
+	private boolean logSteps = true;
 
 
 
@@ -54,8 +55,8 @@ public class GameController {
 			if (this.model.getSnakeDied()) {
 				//isRunning = false;
 				//System.out.println("SLAAANG?");
-				System.out.print("Score: ");
-				System.out.println(model.getScore());
+				//System.out.print("Score: ");
+				//System.out.println(model.getScore());
 				model = new GameModel();
 			} else if (enableViewer) {			
 				this.view.getGamePanel().setGameModel(model);
@@ -75,7 +76,7 @@ public class GameController {
 		if (this.strategy.equals(Strategy.MANUAL)) {
 			return this.keyPressed;
 		} else {
-			return this.ai.getKeyInput(model);
+			return this.ai.getKeyInput(model, logSteps);
 		}
 	}
 

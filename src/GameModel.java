@@ -91,7 +91,7 @@ public class GameModel {
 				return true;
 			}
 		}
-		System.out.println("No food collision");
+		//System.out.println("No food collision");
 		return false;
 	}
 

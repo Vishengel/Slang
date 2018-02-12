@@ -5,9 +5,10 @@ public class AISimple extends AI {
 
 	public AISimple(GameModel model) {
 		this.model = model;
+		
 	}
 	
-	public int getKeyInput(GameModel model) {
+	public int getKeyInput(GameModel model, boolean logSteps) {
 		this.model = model;
 		int headX = model.getSnake().getHead().getXPos(), headY = model.getSnake().getHead().getYPos();
 		int foodX = model.getFoodX(), foodY = model.getFoodY();
