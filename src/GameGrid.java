@@ -8,7 +8,7 @@ public class GameGrid {
 		cellArray = new GridCell[gridSize][gridSize];
 		for(int i=0; i<gridSize; i++) {
 			for(int j=0; j<gridSize; j++) {
-				cellArray[i][j] = new GridCell();
+				cellArray[i][j] = new GridCell(i, j);
 			}
 		}
 	}

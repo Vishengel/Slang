@@ -2,5 +2,6 @@
 public enum Strategy {
 	MANUAL,
 	RANDOM,
-	SIMPLE
+	SIMPLE,
+	ASTAR
 }

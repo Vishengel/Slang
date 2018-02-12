@@ -27,7 +27,6 @@ public class GameController {
 	public void initGame() {
 		if (!strategy.equals(Strategy.MANUAL)) {
 			setAI();
-			System.out.println("AI set");
 		}
 	
 		model = new GameModel();
@@ -85,6 +84,8 @@ public class GameController {
 			this.ai = new AIRandom();
 		} else if (this.strategy.equals(Strategy.SIMPLE)) {
 			this.ai = new AISimple(model);
+		} else if (this.strategy.equals(Strategy.ASTAR)) {
+			this.ai = new AIAStar(model);
 		}
 	}
 	
