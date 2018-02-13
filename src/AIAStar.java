@@ -22,22 +22,18 @@ public class AIAStar extends AI {
 		
 		clearGrid(model.getGameGrid());
 		
-		if(firstRun){
-			nextCell = AStar(headX, headY, foodX, foodY);
-			
-			if(nextCell.getXPos() > headX) {
-				keyInput = 68;
-			} else if (nextCell.getXPos() < headX) {
-				keyInput = 65;
-			} else if (nextCell.getYPos() < headY) {
-				keyInput = 87;
-			} else if (nextCell.getYPos() > headY) {
-				keyInput = 83;
-			}
-		} else {
-			keyInput = 0;
+		nextCell = AStar(headX, headY, foodX, foodY);
+		
+		if(nextCell.getXPos() > headX) {
+			keyInput = 68;
+		} else if (nextCell.getXPos() < headX) {
+			keyInput = 65;
+		} else if (nextCell.getYPos() < headY) {
+			keyInput = 87;
+		} else if (nextCell.getYPos() > headY) {
+			keyInput = 83;
 		}
-		firstRun = true;
+	
 		
 		return keyInput;
 	}
@@ -158,13 +154,6 @@ public class AIAStar extends AI {
 		if (gc.getXPos()-1 >= 0 && !cellArray[gc.getXPos()-1][gc.getYPos()].hasSnake) {
 			neighbors.add(cellArray[gc.getXPos()-1][gc.getYPos()]);
 		}
-		/*
-		for (GridCell n : neighbors) {
-			n.setGScore(gc.getGScore()+1);
-			n.setParent(gc);
-			System.out.println("Neighbor: " + n.getXPos() + ", " + n.getYPos());
-		}
-		*/
 		
 		return neighbors;
 	}
