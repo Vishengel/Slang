@@ -11,7 +11,7 @@ public class GameController {
 	private AI ai;
 	private Strategy strategy;
 	private boolean logSteps = true;
-
+	private boolean stepWise = false;
 
 
 
@@ -69,7 +69,7 @@ public class GameController {
 				Thread.currentThread().interrupt();
 				return;
 			}
-		}	
+		}
 	}
 	
 	public int getKeyInput() {

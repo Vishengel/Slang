@@ -32,7 +32,7 @@ public class GamePanel extends JPanel {
 		
 		for (int i=0; i<gridSize; i++) {
 			for (int j=0; j<gridSize; j++) {
-				g.setColor(Color.WHITE);
+				g.setColor(Color.BLACK);
 				g.drawRect(i*cellSize, j*cellSize, cellSize, cellSize);
 			}
 		}
@@ -41,6 +41,7 @@ public class GamePanel extends JPanel {
 	public void drawObjects(Graphics g) {
 		int gridSize = model.getGameGrid().getGridSize();
 		int cellSize = getSize().width / gridSize;
+		int pX, pY;
 		
 		GameGrid grid = model.getGameGrid();
 		
@@ -52,7 +53,31 @@ public class GamePanel extends JPanel {
 				} else if (grid.getCellArray()[i][j].getHasFood()) {
 					g.setColor(Color.RED);
 					g.fillRect(i*cellSize+1, j*cellSize+1, cellSize-1, cellSize-1);
-				}
+				} else if (grid.getCellArray()[i][j].getPath()) {
+					g.setColor(Color.BLUE);
+					g.fillRect(i*cellSize+1, j*cellSize+1, cellSize-1, cellSize-1);
+				}	/*else if (grid.getCellArray()[i][j].getFScore() > 0) {
+					g.setColor(Color.BLUE);
+					g.fillRect(i*cellSize+1, j*cellSize+1, cellSize-1, cellSize-1);
+					g.setColor(Color.BLACK);
+					g.drawString(Integer.toString(grid.getCellArray()[i][j].getFScore()), 
+							i*cellSize+1, (int) (j*cellSize+0.25*cellSize));
+					
+					g.drawString(Integer.toString(grid.getCellArray()[i][j].getXPos()) + ", ", 
+							i*cellSize+1, (int) (j*cellSize+0.6*cellSize-1));
+					
+					g.drawString(Integer.toString(grid.getCellArray()[i][j].getYPos()), 
+							(int) (i*cellSize+0.5*cellSize), (int) (j*cellSize+0.6*cellSize-1));
+					
+					pX = grid.getCellArray()[i][j].getParent().getXPos();
+					pY = grid.getCellArray()[i][j].getParent().getYPos();
+					
+					g.drawString(Integer.toString(pX) + ", ", 
+							i*cellSize+1, (int) (j*cellSize+cellSize-1));
+					
+					g.drawString(Integer.toString(pY), 
+							(int) (i*cellSize+0.5*cellSize), (int) (j*cellSize+cellSize-1));
+				} */
 			}
 		}
 	}
