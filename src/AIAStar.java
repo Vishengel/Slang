@@ -33,7 +33,6 @@ public class AIAStar extends AI {
 		} else if (nextCell.getYPos() > headY) {
 			keyInput = 83;
 		}
-	
 		
 		return keyInput;
 	}
@@ -77,11 +76,14 @@ public class AIAStar extends AI {
 			closedSet.add(current);
 			
 			for (GridCell n : getNeighbors(current)) {
+				// Do nothing if the neighbor is already in the closed set
 				if(inSet(n, closedSet) < 0) {
+					// Add the node to the open set if it is not already a part of it
 					if(inSet(n, openSet) < 0) {
 						openSet.add(n);
 					}
 					tempGScore = current.getGScore() + 1;
+					
 					if (tempGScore < n.getGScore()) {
 						n.setParent(current);
 						n.setGScore(tempGScore);
